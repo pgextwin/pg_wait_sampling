@@ -24,7 +24,15 @@ if (-not (Test-Path $devCmd)) { throw 'VsDevCmd unavailable' }
 
 # The PostgreSQL module macros and collector declaration export their entry points.
 # The upstream _PG_init definition has no explicit export.
-@('LIBRARY pg_wait_sampling', 'EXPORTS', '    _PG_init') |
+@(
+    'LIBRARY pg_wait_sampling'
+    'EXPORTS'
+    '    _PG_init'
+    '    pg_wait_sampling_get_current'
+    '    pg_wait_sampling_get_history'
+    '    pg_wait_sampling_get_profile'
+    '    pg_wait_sampling_reset_profile'
+) |
     Set-Content -Path (Join-Path $source 'pg_wait_sampling.def') -Encoding ascii
 
 $buildCmd = Join-Path $env:RUNNER_TEMP 'pg-wait-sampling-build.cmd'
