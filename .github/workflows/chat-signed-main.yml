@@ -29,6 +29,6 @@ jobs:
       artifact-metadata: write
     uses: pgextwin/build/.github/workflows/chat-signed-main-source.yml@1f224f985e679d5e23e502198c801b7054166481
     with:
-      request_issue: 2
+      request_issue: 3
       extension_config_path: config/extension.json
       test_contract_path: config/test-contract.json
