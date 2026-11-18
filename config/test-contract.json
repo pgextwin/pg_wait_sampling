@@ -1,0 +1,38 @@
+{
+  "contractVersion": 2,
+  "extension": "pg_wait_sampling",
+  "smokeTest": {
+    "script": "windows/ci/smoke-test.ps1"
+  },
+  "runtimeRequirements": {
+    "extensionCreation": "required",
+    "preload": "shared",
+    "backgroundWorker": true,
+    "clientExecutable": {
+      "required": false,
+      "packagePaths": []
+    }
+  },
+  "testSetup": {
+    "preload": "shared",
+    "backgroundWorker": true,
+    "settings": []
+  },
+  "coverage": {
+    "createExtension": "covered",
+    "backgroundWorker": "covered",
+    "clientExecutable": "not-applicable",
+    "serverLogAssertions": "not-applicable",
+    "upgrade": "not-covered"
+  },
+  "functionalScenarios": [
+    {
+      "id": "create-extension-and-query-collector",
+      "description": "Starts PostgreSQL with shared preload, creates SQL version 1.1, and queries current waits, collector history, and collector profile.",
+      "evidence": [
+        "sql-result",
+        "background-worker-side-effect"
+      ]
+    }
+  ]
+}
