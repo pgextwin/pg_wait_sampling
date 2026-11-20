@@ -31,7 +31,7 @@ if ($LASTEXITCODE -ne 0 -or
     $UpstreamRepository -cne [string]$manifest.upstream.repository -or
     $UpstreamRef -cne [string]$manifest.upstream.ref -or
     $UpstreamVersion -cne [string]$manifest.upstream.version -or
-    $PostgreSqlMajor -notin @(15, 16, 17, 18)) {
+    $PostgreSqlMajor -notin @(15, 16, 17, 18, 19)) {
     throw "Package identity mismatch for pg_wait_sampling."
 }
 
