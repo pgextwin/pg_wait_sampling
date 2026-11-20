@@ -35,10 +35,17 @@ if (-not (Test-Path $devCmd)) { throw 'VsDevCmd unavailable' }
 ) |
     Set-Content -Path (Join-Path $source 'pg_wait_sampling.def') -Encoding ascii
 
+$clStdLine = ''
+$pgMajorText = & (Join-Path $PgRoot 'bin\pg_config.exe') --version
+if ($pgMajorText -match '(\d+)\.') {
+    if ([int]$Matches[1] -ge 19) { $clStdLine = 'set "CL=/std:c11"' }
+}
+
 $buildCmd = Join-Path $env:RUNNER_TEMP 'pg-wait-sampling-build.cmd'
 @"
 @echo off
 call "$devCmd" -arch=x64 -host_arch=x64 >nul
+$clStdLine
 if errorlevel 1 exit /b %errorlevel%
 pushd "$source"
 if errorlevel 1 exit /b %errorlevel%
